@@ -23,6 +23,20 @@
             <%= image_tag "xe_dap.jpg", class: "img-responsive" %>
           </div>
         </div>
+
+          <%= form_tag "/search", method: "get", class: "navbar-form pull-right",
+            id: "search-posts", role: "search" do %>
+            <div class="input-group">
+              <%= text_field_tag :q, params[:q], placeholder: t("layouts.search"),
+                id: "search", class: "form-control" %>
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+              </div>
+            </div>
+          <% end %>
+
       </div>
     </div>
     <%= render "layouts/modal_login" %>

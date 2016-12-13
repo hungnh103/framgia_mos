@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    flash[:warning] = exception.message
+    redirect_to root_url
+  end
+
   private
 
   def configure_permitted_parameters

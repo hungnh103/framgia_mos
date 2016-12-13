@@ -1,0 +1,5 @@
+<h3><%= t ".title" %></h3>
+<%= form_for [:admin, @user], url: admin_user_assign_roles_path do |f| %>
+  <%= f.select :roles_group_id, RolesGroup.all.pluck(:name, :id), {include_blank: true} %>
+  <%= f.submit t(".assign") %>
+<% end %>

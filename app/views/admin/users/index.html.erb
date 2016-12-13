@@ -40,15 +40,11 @@
               <td><%= user.email %></td>
               <td>
                 <% if user.admin? %>
-                  <a data-toggle="tooltip" class="tooltipLink"
-                    title="<%= user.role %>">
-                    <i class="fa fa-user-secret"></i>
-                  </a>
+                  Admin
+                <% elsif user.roles_group %>
+                  <%= user.roles_group_name %>
                 <% else %>
-                  <a data-toggle="tooltip" class="tooltipLink"
-                    title="<%= user.role %>">
-                    <i class="fa fa-user"></i>
-                  </a>
+                  User
                 <% end %>
               </td>
               <td>
@@ -66,38 +62,39 @@
               </td>
               <td class="column-min-width">
                 <ul class="menu-action">
-                  <li>
-                    <%= link_to "#", title: t(".tooltip_show") do %>
-                      <span class="glyphicon glyphicon-info-sign"></span>
-                    <% end %>
-                  </li>
                   <% unless user.admin? %>
-                    <% if user.active? %>
+                    <% if can? :assign_roles, user %>
                       <li>
-                        <%= form_for [:admin, user] do |f| %>
-                          <%= f.hidden_field :status, value: :blocked %>
-                          <%= button_tag(type: "submit", class: "btn-action",
-                            title: t(".tooltip_lock")) do %>
-                            <i class="fa fa-lock"></i>
-                          <% end %>
-                        <% end %>
-                      </li>
-                    <% elsif user.blocked? %>
-                      <li>
-                        <%= form_for [:admin, user] do |f| %>
-                          <%= f.hidden_field :status, value: :active %>
-                          <%= button_tag(type: "submit", class: "btn-action",
-                            title: t(".tooltip_unlock")) do %>
-                            <i class="fa fa-unlock"></i>
-                          <% end %>
+                        <%= link_to new_admin_user_assign_roles_path(user),
+                          title: t(".tooltip_assign_role") do %>
+                          <span class="fa fa-key"></span>
                         <% end %>
                       </li>
                     <% end %>
-                    <li>
-                      <%= link_to "#", title: t(".tooltip_delete") do %>
-                        <span class="glyphicon glyphicon-remove"></span>
+
+                    <% if can? :block, user %>
+                      <% if user.active? %>
+                        <li>
+                          <%= form_for [:admin, user] do |f| %>
+                            <%= f.hidden_field :status, value: :blocked %>
+                            <%= button_tag(type: "submit", class: "btn-action",
+                              title: t(".tooltip_lock")) do %>
+                              <i class="fa fa-lock"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
+                      <% elsif user.blocked? %>
+                        <li>
+                          <%= form_for [:admin, user] do |f| %>
+                            <%= f.hidden_field :status, value: :active %>
+                            <%= button_tag(type: "submit", class: "btn-action",
+                              title: t(".tooltip_unlock")) do %>
+                              <i class="fa fa-unlock"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
                       <% end %>
-                    </li>
+                    <% end %>
                   <% end %>
                 </ul>
               </td>

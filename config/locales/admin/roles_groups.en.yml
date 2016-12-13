@@ -1,0 +1,11 @@
+en:
+  admin:
+    roles_groups:
+      index:
+        new: New Roles group
+      create:
+        errors: Invalid roles Group input
+    assign_roles:
+      new:
+        assign: Assign
+        title: Assign Roles

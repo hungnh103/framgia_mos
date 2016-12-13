@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :avatar
       t.integer :status, default: 0
       t.integer :role, default: 1
+      t.integer :roles_group_id
 
       t.timestamps null: false
     end

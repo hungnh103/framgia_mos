@@ -7,12 +7,14 @@
           <%= t ".show" %>
         </a>
       </li>
-      <li class="<%= 'active' if params[:action] == 'update' %>">
-        <a data-toggle="tab" href="#advertisment-edit">
-          <i class="glyphicon glyphicon-pencil"></i>
-          <%= t ".edit" %>
-        </a>
-      </li>
+      <% if can? :update, @advertisment %>
+        <li class="<%= 'active' if params[:action] == 'update' %>">
+          <a data-toggle="tab" href="#advertisment-edit">
+            <i class="glyphicon glyphicon-pencil"></i>
+            <%= t ".edit" %>
+          </a>
+        </li>
+      <% end %>
     </ul>
 
     <div class="clearfix"></div>
@@ -25,20 +27,22 @@
             <h3><%= @advertisment.url %></h3>
             <%= image_tag @advertisment.image, class: "img-responsive image-ad" %>
           </div>
-          <div id="advertisment-edit"
-            class="tab-pane fade <%= 'in active' if params[:action] == 'update' %>">
-            <h3><%= t ".edit" + @advertisment.description %></h3>
-            <div class="advertisment-form">
-              <%= simple_form_for [:admin, @advertisment] do |f| %>
-                <%= f.error_notification %>
-                <%= f.input :description, as: :text, input_html: {class: "form-control"} %>
-                <%= f.input :url, as: :text, input_html: {class: "form-control"} %>
-                <%= f.input :image, as: :file, input_html: {class: "form-control"} %>
-                <br>
-                <%= f.button :submit, class: "btn btn-primary" %>
-              <% end %>
+          <% if can? :update, @advertisment %>
+            <div id="advertisment-edit"
+              class="tab-pane fade <%= 'in active' if params[:action] == 'update' %>">
+              <h3><%= t ".edit" + @advertisment.description %></h3>
+              <div class="advertisment-form">
+                <%= simple_form_for [:admin, @advertisment] do |f| %>
+                  <%= f.error_notification %>
+                  <%= f.input :description, as: :text, input_html: {class: "form-control"} %>
+                  <%= f.input :url, as: :text, input_html: {class: "form-control"} %>
+                  <%= f.input :image, as: :file, input_html: {class: "form-control"} %>
+                  <br>
+                  <%= f.button :submit, class: "btn btn-primary" %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>

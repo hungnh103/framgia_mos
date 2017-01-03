@@ -33,3 +33,5 @@ categories:
   posts:
     per_page: 6
 avatar_admin: "200x200"
+confessions:
+    per_page: 5

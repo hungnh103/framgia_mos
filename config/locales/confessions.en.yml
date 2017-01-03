@@ -1,0 +1,8 @@
+en:
+  confessions:
+    index:
+      framgia_confession: "Framgia confession"
+      write_here: "Write confession here !"
+    create:
+      success: "Created confession success!"
+      fail: "Create confession fail!"

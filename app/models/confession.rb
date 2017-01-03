@@ -1,6 +1,7 @@
 class Confession < ActiveRecord::Base
 
   enum status: [:pending, :accepted, :reject]
+  validates :content, presence: true
 
   class << self
     def each_month year

@@ -25,6 +25,9 @@
               </ul>
             </li>
           <% end %>
+          <li data-turbolinks="false">
+            <%= link_to t("layouts.confessions"), confessions_path %>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% unless user_signed_in? %>

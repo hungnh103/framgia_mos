@@ -1,0 +1,56 @@
+<div class="col-md-8 all-confessions">
+  <div class="display-confession">
+    <% @confessions.each do |confession| %>
+      <div class="one-confession">
+        <div class="framgia-confession">
+          <%= image_tag "framgia.png", class: "image-responsive framgia"%>
+          <kbd><%= t ".framgia_confession"%></kbd>
+          <div class="time-updated-confess">
+            <label class="default">
+              <i class="fa fa-clock-o"></i>
+              <span>
+                &nbsp<%= confession.updated_at.strftime Settings.time_format.normal %>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="content-confession">
+          <div class="confession-content">
+            <p><%= confession.content %></p>
+          </div>
+          .....
+          <div class="admin-conment">
+            <span><%= confession.admin_comment %></span>
+          </div>
+        </div>
+        <div class="comment">
+          <div id="fb-root"></div>
+          <div class="fb-comments"
+            data-href="<%= request.original_url + "/" + confession.id.to_s %>"
+            data-width="100%" data-numconfessions="5"></div>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @confessions, theme: "twitter-bootstrap-3",
+      pagination_class: "pagination-sm" %>
+  </div>
+</div>
+<div class="col-md-4 confession-create">
+  <div class="confession-banner">
+    <%= image_tag "confession-banner.jpg",
+      class: "img-circle image-responsive confess-banner"%>
+  </div>
+  <div class="form-confession">
+    <%= simple_form_for @confession do |f| %>
+      <%= f.error_notification %>
+      <%= f.hidden_field :status, value: :pending %>
+      <%= f.input :content, label: t(".write_here"),
+        input_html: {class: "form-control"} %>
+      <%= f.button :submit, class: "btn btn-primary submit-confess" %>
+    <% end %>
+  </div>
+  <div class="confession-slogan">
+    <%= image_tag "confession-slogan.PNG",
+      class: "image-responsive confess-banner"%>
+  </div>
+</div>

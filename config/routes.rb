@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: :show
   resources :likes, only: :create
   resources :categories, only: :show
+  resources :confessions
 
   namespace :admin do
     root "statistics#index", as: :root

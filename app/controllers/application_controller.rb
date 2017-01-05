@@ -5,10 +5,15 @@ class ApplicationController < ActionController::Base
 
   rescue_from Exception do |exception|
     flash[:warning] = exception.message
-    redirect_to root_url
+    redirect_to_root
   end
 
   private
+
+  def redirect_to_root
+    (current_admin_user && namespace == "admin") ?
+      redirect_to(admin_root_url) : redirect_to(root_url)
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) {|u| u.permit :name, :user_name,
@@ -24,19 +29,24 @@ class ApplicationController < ActionController::Base
   end
 
   def load_favourite_posts
-    @favourite_posts = Post.order(likes_count: :desc)
+    @favourite_posts = Post.where(status: [:admin_create, :accepted])
+      .order(likes_count: :desc)
       .limit Settings.static_pages.home.favourite_posts_size
   end
 
   def load_recent_posts
-    @recent_posts = Post.accepted.order(created_at: :desc).drop(1)
+    @recent_posts = Post.where(status: [:admin_create, :accepted])
+      .order(created_at: :desc).drop(1)
       .take Settings.static_pages.number_hot_posts
   end
 
   def current_ability
+    Ability.new(current_user, namespace.camelize)
+  end
+
+  def namespace
     controller_name_segments = params[:controller].split("/")
     controller_name_segments.pop
-    controller_namespace = controller_name_segments.join("/").camelize
-    Ability.new(current_user, controller_namespace)
+    controller_name_segments.join("/")
   end
 end

@@ -1,0 +1,31 @@
+<div class="row">
+  <div id="wrapper-body">
+    <div class="col-md-12 col-xs-12 main-app search">
+      <h3><%= t ".results" %></h3>
+      <p> <%= t ".number_of_results", number: @posts_size, text: params[:q] %></span></p>
+      <div class="post-list row">
+        <% @posts.each do |post| %>
+          <div class="post col-lg-12">
+            <%= link_to post_path(post.id) do %>
+              <%= image_tag post.image.url, class: "post-image" %>
+            <% end %>
+            <div class="caption">
+              <h4 class="title">
+                <strong><%= link_to post.title, post_path(post.id) %></strong>
+              </h4>
+              <div class="info">
+              </div>
+              <div class="description">
+                <%= truncate post.description, length: 300 %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="center">
+        <%= paginate @posts, theme: "twitter-bootstrap-3",
+          pagination_class: "pagination-sm" %>
+      </div>
+    </div>
+  </div>
+</div>

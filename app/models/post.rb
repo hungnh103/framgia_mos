@@ -1,4 +1,11 @@
+# require "elasticsearch/model"
+
 class Post < ActiveRecord::Base
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
+
+  ATTRIBUTES_ROLES = [:read, :create, :update, :destroy, :destroy_all]
+
   belongs_to :user
   belongs_to :category
   has_many :comments, dependent: :destroy
@@ -18,6 +25,17 @@ class Post < ActiveRecord::Base
   validates :post_type, presence: true
   validate :validate_audio, on: :create
 
+  delegate :name, to: :category, prefix: true
+
+  # settings index: {number_of_shards: 1} do
+  #   mappings dynamic: "false" do
+  #     indexes :title, analyzer: "english", index_options: "offsets"
+  #     indexes :description, analyzer: "english"
+  #     indexes :content, analyzer: "english"
+  #     indexes :author, analyzer: "english"
+  #   end
+  # end
+
   class << self
     def each_month year
       posts_per_month = (1..12).map do |month|
@@ -26,9 +44,24 @@ class Post < ActiveRecord::Base
     end
 
     def posts_of_month month, year
-      Post.accepted.where("year(created_at) = #{year} and month(created_at) = #{month}").size
+      Post.where(status: [:admin_create, :accepted])
+        .where("year(created_at) = #{year} and month(created_at) = #{month}").size
     end
+
+    # def elasticsearch query
+    #   __elasticsearch__.search(
+    #     {
+    #       query: {
+    #         multi_match: {
+    #           query: query,
+    #           fields: ["title^10", "content", "description", "author"]
+    #         }
+    #       }
+    #     }
+    #   )
+    # end
   end
+
 
   def label_status
     case self.status
@@ -51,3 +84,10 @@ class Post < ActiveRecord::Base
     end
   end
 end
+
+# Post.__elasticsearch__.client.indices.delete index: Post.index_name rescue nil
+
+# Post.__elasticsearch__.client.indices.create \
+#   index: Post.index_name,
+#   body: {settings: Post.settings.to_hash, mappings: Post.mappings.to_hash}
+# Post.import

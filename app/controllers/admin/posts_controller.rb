@@ -41,6 +41,10 @@ class Admin::PostsController < Admin::BaseController
 
   def destroy
     ids = params[:post_ids].nil? ? params[:id] : params[:post_ids]
+    if params[:post_ids].present?
+      authorize! :destroy_all, Post
+    end
+
     if ids.nil?
       flash[:danger] = t ".must_select"
     else

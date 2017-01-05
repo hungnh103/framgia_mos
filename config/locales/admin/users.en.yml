@@ -14,7 +14,7 @@ en:
         search: "Search"
         index_user: "List all users"
         no_user_display: "There are not users displayed!"
-        tooltip_show: "Show"
+        tooltip_assign_role: "Assign roles"
         tooltip_lock: "Lock"
         tooltip_unlock: "Unlock"
         tooltip_delete: "Delete"

@@ -1,5 +1,6 @@
 class Admin::ConfessionsController < Admin::BaseController
   load_and_authorize_resource
+  skip_authorize_resource only: :update
 
   def index
     @search = Confession.all.ransack params[:q]
@@ -12,6 +13,8 @@ class Admin::ConfessionsController < Admin::BaseController
   end
 
   def update
+    authorize! :accept, Confession
+
     if @confession.update_attributes confession_params
       flash[:success] = t ".success"
     else
@@ -22,6 +25,10 @@ class Admin::ConfessionsController < Admin::BaseController
 
   def destroy
     ids = params[:confession_ids].nil? ? params[:id] : params[:confession_ids]
+    if params[:confession_ids].present?
+      authorize! :destroy_all, Confession
+    end
+
     if ids.nil?
       flash[:danger] = t ".fail"
     else

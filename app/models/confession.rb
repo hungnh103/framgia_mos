@@ -1,5 +1,7 @@
 class Confession < ActiveRecord::Base
 
+  ATTRIBUTES_ROLES = [:read, :accept, :destroy, :destroy_all]
+
   enum status: [:pending, :accepted, :reject]
   validates :content, presence: true
 

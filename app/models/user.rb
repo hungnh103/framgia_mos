@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  ATTRIBUTES_ROLES = [:read, :block]
+
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, :omniauth_providers => [:facebook, :google_oauth2, :twitter]
@@ -13,6 +15,10 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :likes, dependent: :destroy
+  belongs_to :roles_group
+
+  delegate :roles_models, to: :roles_group
+  delegate :name, to: :roles_group, prefix: true
 
   mount_uploader :avatar, UserAvatarUploader
 

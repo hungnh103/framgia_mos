@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+  ATTRIBUTES_ROLES = [:read, :create, :update, :destroy, :destroy_all]
+
   has_many :posts, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
@@ -19,7 +21,8 @@ class Category < ActiveRecord::Base
   end
 
   def all_posts
-    Post.accepted.where category_id: ((self.leaves.to_a << self).map &:id)
+    Post.where(status: [:admin_create, :accepted])
+      .where category_id: ((self.leaves.to_a << self).map &:id)
   end
 
   private

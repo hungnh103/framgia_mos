@@ -1,13 +1,17 @@
 class Admin::UsersController < Admin::BaseController
-  load_and_authorize_resource
+  load_resource
 
   def index
+    authorize! :read, User
     @search = User.all.ransack params[:q]
     @users = @search.result.order(:name).page(params[:page])
       .per Settings.admin.users.per_page
   end
 
   def update
+    if params[:user][:status].present?
+      authorize! :block, @user
+    end
     if @user.update_attributes user_params
       flash[:success]= t ".success"
     else

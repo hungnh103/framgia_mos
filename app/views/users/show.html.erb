@@ -33,8 +33,10 @@
             <% if @user == current_user %>
               <td><%= post.label_status.html_safe %></td>
               <td>
-                <%= link_to edit_post_path(post) do %>
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <% if post.pending? %>
+                  <%= link_to edit_post_path(post) do %>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <% end %>
                 <% end %>
                 <%= link_to post, method: :delete, data: {confirm: t(".confirm")} do %>
                   <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -45,6 +47,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @posts %>
+    <%= paginate @posts, theme: "twitter-bootstrap-3",
+      pagination_class: "pagination-sm" %>
   </div>
 </div>

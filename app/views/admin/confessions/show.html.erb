@@ -16,7 +16,7 @@
           <div id="confession-show"
             class="tab-pane fade <%= 'in active' if params[:action] == 'show' %>">
             <br>
-            <% if @confession.pending? %>
+            <% if @confession.pending? && can?(:accept, @confession) %>
               <div class="confession-form">
                 <%= simple_form_for [:admin, @confession] do |f| %>
                   <%= f.error_notification %>

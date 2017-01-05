@@ -7,7 +7,7 @@ class Admin::SessionsController < Devise::SessionsController
 
   def create
     user = User.find_by email: params[:admin_user][:email]
-    (user && user.user?) ? redirect_to(root_url) : super
+    (user && user.user? && user.roles_group.nil?) ? redirect_to(root_url) : super
   end
 
   def destroy

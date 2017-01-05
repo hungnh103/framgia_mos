@@ -35,7 +35,7 @@ namespace :db do
 
       puts "Creating Categories"
 
-      ["radio online", "blog của tôi", "blog cuộc sống"].each do |name|
+      ["radio online", "blog của tôi", "blog cuộc sống", "thơ blog"].each do |name|
         Fabricate :category, name: name
       end
 
@@ -44,8 +44,8 @@ namespace :db do
         Fabricate :category, name: name, parent_id: 1
       end
 
-      ["yêu 24/7", "cafe.blog", "thơ blog", "hôm nay nghe gì", "truyện online",
-        "blog family", "blogger tiêu biểu"].each do |name|
+      ["yêu 24/7", "cafe.blog", "hôm nay nghe gì", "truyện online",
+        "blog family"].each do |name|
         Fabricate :category, name: name, parent_id: 2
       end
 
@@ -161,7 +161,7 @@ namespace :db do
           ',
         status: :accepted,
         user_id: 11,
-        category_id: 1,
+        category_id: 4,
         image: File.open(File.join(Rails.root, "app/assets/images/posts/2.jpg")),
         created_at: (Time.now - rand(Time.now.month).month)
       )
@@ -214,7 +214,7 @@ namespace :db do
         content: '',
         status: :accepted,
         user_id: 11,
-        category_id: 1,
+        category_id: 3,
         image: File.open(File.join(Rails.root, "app/assets/images/posts/1.jpg")),
         created_at: (Time.now - rand(Time.now.month).month)
       )
@@ -297,7 +297,7 @@ namespace :db do
           ',
         status: :accepted,
         user_id: 12,
-        category_id: 12,
+        category_id: 20,
         image: File.open(File.join(Rails.root, "app/assets/images/posts/5.jpg")),
         created_at: (Time.now - rand(Time.now.month).month)
       )
@@ -606,6 +606,430 @@ namespace :db do
         created_at: (Time.now - rand(Time.now.month).month)
       )
 
+      Post.create(
+        post_type: :normal,
+        title: "Bạn có thật sự hiểu về tương lai chưa?",
+        description: "Đừng đếm những gì bạn đã mất, hãy quý trọng những gì bạn đang có và lên kế hoạch cho những gì sẽ đạt được bởi quá khứ không bao giờ trở lại, nhưng tương lai có thể bù đắp cho mất mát.",
+        content: '<p><font face="Arial">1. Sự kh&aacute;c biệt giữa qu&aacute; khứ, hiện tại v&agrave; tương lai chỉ l&agrave; một ảo tưởng dai dẳng đến ngoan cố.</font><br />
+          <br />
+          <font face="Arial">(Albert Einstein)</font><br />
+          <br />
+          <font face="Arial">2. Tương lai của bạn phụ thuộc v&agrave;o rất nhiều điều, nhưng chủ yếu l&agrave; v&agrave;o bạn.</font><br />
+          <br />
+          <font face="Arial">(Frank Tyger)</font><br />
+          <br />
+          <font face="Arial">3. Lịch sử l&agrave; g&igrave;? Đ&oacute; l&agrave; tiếng vọng của qu&aacute; khứ trong tương lai v&agrave; l&agrave; &aacute;nh phản chiếu của tương lai tr&ecirc;n qu&aacute; khứ.</font><br />
+          <br />
+          <font face="Arial">(Victor Hugo)</font><br />
+          <br />
+          <font face="Arial">4. Đừng bao giờ để đến ng&agrave;y mai những việc m&agrave; bạn c&oacute; thể để đến ng&agrave;y kia.</font><br />
+          <br />
+          <font face="Arial">(Mark Twain)</font><br />
+          <br />
+          <font face="Arial">5. Qu&aacute; khứ l&agrave; tro t&agrave;n; tương lai l&agrave; gỗ. Chỉ ng&agrave;y h&ocirc;m nay l&agrave; lửa s&aacute;ng ch&oacute;i l&ograve;a.</font><br />
+          &nbsp;</p>
+
+          <p><font face="Arial"><img alt="Bạn có thật sự hiểu về tương lai chưa?" src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_12/Ngay_1/Images/ban-co-that-su-hieu-ve-tuong-lai-chua.jpg" /></font></p>
+
+          <p><br />
+          <font face="Arial">(Ngạn ngữ Eskimo)</font><br />
+          <br />
+          <font face="Arial">6. Tương lai phụ thuộc v&agrave;o điều ch&uacute;ng ta l&agrave;m trong hiện tại.</font><br />
+          <br />
+          <font face="Arial">(Mahatma Gandhi)</font><br />
+          <br />
+          <font face="Arial">7. T&ocirc;i chẳng bao giờ nghĩ tới tương lai &ndash; n&oacute; lu&ocirc;n lu&ocirc;n đến đủ sớm.</font><br />
+          <br />
+          <font face="Arial">(Albert Einstein)</font><br />
+          <br />
+          <font face="Arial">8. Thế giới đầy những kẻ m&agrave; quan điểm về một tương lai thỏa m&atilde;n thực chất l&agrave; sự quay trở lại qu&aacute; khứ đầy l&yacute; tưởng.</font><br />
+          <br />
+          <font face="Arial">(Robertson Davies)</font><br />
+          <br />
+          <font face="Arial">9. Mối đe dọa lớn nhất hướng tới tương lai l&agrave; sự thờ ơ.</font><br />
+          <br />
+          <font face="Arial">(Khuyết danh)</font><br />
+          <br />
+          <font face="Arial">10. Đừng đếm những g&igrave; bạn đ&atilde; mất, h&atilde;y qu&yacute; trọng những g&igrave; bạn đang c&oacute; v&agrave; l&ecirc;n kế hoạch cho những g&igrave; sẽ đạt được bởi qu&aacute; khứ kh&ocirc;ng bao giờ trở lại, nhưng tương lai c&oacute; thể b&ugrave; đắp cho mất m&aacute;t.</font><br />
+          <br />
+          <font face="Arial">(Khuyết danh)</font><br />
+          <br />
+          <font face="Arial">11. Tương lai c&oacute; rất nhiều t&ecirc;n: Với kẻ yếu, n&oacute; l&agrave; Điều kh&ocirc;ng thể đạt được. Đối với người hay sợ h&atilde;i, n&oacute; l&agrave; Điều chưa biết. Với ai dũng cảm, n&oacute; l&agrave; Cơ hội.</font><br />
+          <br />
+          <font face="Arial">(Victor Hugo)</font><br />
+          <br />
+          <font face="Arial">12. T&ocirc;i chẳng c&oacute; g&igrave; để l&agrave;m với qu&aacute; khứ; với tương lai cũng vậy. T&ocirc;i sống trong hiện tại.</font><br />
+          <br />
+          <font face="Arial">(Ralph Waldo Emerson)</font><br />
+          <br />
+          <font face="Arial">13. Sống trong hiện tại thật kh&oacute; khăn, sống trong tương lai l&agrave; v&ocirc; nghĩa, v&agrave; sống trong qu&aacute; khứ l&agrave; bất khả thi.</font><br />
+          <br />
+          <font face="Arial">(Frank Herbert)</font><br />
+          <br />
+          <font face="Arial"><strong>Blog Radio Sưu tầm v&agrave; tổng hợp.</strong></font></p>
+
+        ',
+        status: :accepted,
+        user_id: 12,
+        category_id: 20,
+        image: File.open(File.join(Rails.root, "app/assets/images/posts/9.jpg")),
+        created_at: (Time.now - rand(Time.now.month).month)
+      )
+
+      Post.create(
+        post_type: :normal,
+        title: "Bạn có thật sự hiểu về tương lai chưa?",
+        description: "Đừng đếm những gì bạn đã mất, hãy quý trọng những gì bạn đang có và lên kế hoạch cho những gì sẽ đạt được bởi quá khứ không bao giờ trở lại, nhưng tương lai có thể bù đắp cho mất mát.",
+        content: '<p><font face="Arial">1. Sự kh&aacute;c biệt giữa qu&aacute; khứ, hiện tại v&agrave; tương lai chỉ l&agrave; một ảo tưởng dai dẳng đến ngoan cố.</font><br />
+          <br />
+          <font face="Arial">(Albert Einstein)</font><br />
+          <br />
+          <font face="Arial">2. Tương lai của bạn phụ thuộc v&agrave;o rất nhiều điều, nhưng chủ yếu l&agrave; v&agrave;o bạn.</font><br />
+          <br />
+          <font face="Arial">(Frank Tyger)</font><br />
+          <br />
+          <font face="Arial">3. Lịch sử l&agrave; g&igrave;? Đ&oacute; l&agrave; tiếng vọng của qu&aacute; khứ trong tương lai v&agrave; l&agrave; &aacute;nh phản chiếu của tương lai tr&ecirc;n qu&aacute; khứ.</font><br />
+          <br />
+          <font face="Arial">(Victor Hugo)</font><br />
+          <br />
+          <font face="Arial">4. Đừng bao giờ để đến ng&agrave;y mai những việc m&agrave; bạn c&oacute; thể để đến ng&agrave;y kia.</font><br />
+          <br />
+          <font face="Arial">(Mark Twain)</font><br />
+          <br />
+          <font face="Arial">5. Qu&aacute; khứ l&agrave; tro t&agrave;n; tương lai l&agrave; gỗ. Chỉ ng&agrave;y h&ocirc;m nay l&agrave; lửa s&aacute;ng ch&oacute;i l&ograve;a.</font><br />
+          &nbsp;</p>
+
+          <p><font face="Arial"><img alt="Bạn có thật sự hiểu về tương lai chưa?" src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_12/Ngay_1/Images/ban-co-that-su-hieu-ve-tuong-lai-chua.jpg" /></font></p>
+
+          <p><br />
+          <font face="Arial">(Ngạn ngữ Eskimo)</font><br />
+          <br />
+          <font face="Arial">6. Tương lai phụ thuộc v&agrave;o điều ch&uacute;ng ta l&agrave;m trong hiện tại.</font><br />
+          <br />
+          <font face="Arial">(Mahatma Gandhi)</font><br />
+          <br />
+          <font face="Arial">7. T&ocirc;i chẳng bao giờ nghĩ tới tương lai &ndash; n&oacute; lu&ocirc;n lu&ocirc;n đến đủ sớm.</font><br />
+          <br />
+          <font face="Arial">(Albert Einstein)</font><br />
+          <br />
+          <font face="Arial">8. Thế giới đầy những kẻ m&agrave; quan điểm về một tương lai thỏa m&atilde;n thực chất l&agrave; sự quay trở lại qu&aacute; khứ đầy l&yacute; tưởng.</font><br />
+          <br />
+          <font face="Arial">(Robertson Davies)</font><br />
+          <br />
+          <font face="Arial">9. Mối đe dọa lớn nhất hướng tới tương lai l&agrave; sự thờ ơ.</font><br />
+          <br />
+          <font face="Arial">(Khuyết danh)</font><br />
+          <br />
+          <font face="Arial">10. Đừng đếm những g&igrave; bạn đ&atilde; mất, h&atilde;y qu&yacute; trọng những g&igrave; bạn đang c&oacute; v&agrave; l&ecirc;n kế hoạch cho những g&igrave; sẽ đạt được bởi qu&aacute; khứ kh&ocirc;ng bao giờ trở lại, nhưng tương lai c&oacute; thể b&ugrave; đắp cho mất m&aacute;t.</font><br />
+          <br />
+          <font face="Arial">(Khuyết danh)</font><br />
+          <br />
+          <font face="Arial">11. Tương lai c&oacute; rất nhiều t&ecirc;n: Với kẻ yếu, n&oacute; l&agrave; Điều kh&ocirc;ng thể đạt được. Đối với người hay sợ h&atilde;i, n&oacute; l&agrave; Điều chưa biết. Với ai dũng cảm, n&oacute; l&agrave; Cơ hội.</font><br />
+          <br />
+          <font face="Arial">(Victor Hugo)</font><br />
+          <br />
+          <font face="Arial">12. T&ocirc;i chẳng c&oacute; g&igrave; để l&agrave;m với qu&aacute; khứ; với tương lai cũng vậy. T&ocirc;i sống trong hiện tại.</font><br />
+          <br />
+          <font face="Arial">(Ralph Waldo Emerson)</font><br />
+          <br />
+          <font face="Arial">13. Sống trong hiện tại thật kh&oacute; khăn, sống trong tương lai l&agrave; v&ocirc; nghĩa, v&agrave; sống trong qu&aacute; khứ l&agrave; bất khả thi.</font><br />
+          <br />
+          <font face="Arial">(Frank Herbert)</font><br />
+          <br />
+          <font face="Arial"><strong>Blog Radio Sưu tầm v&agrave; tổng hợp.</strong></font></p>
+
+        ',
+        status: :accepted,
+        user_id: 12,
+        category_id: 4,
+        image: File.open(File.join(Rails.root, "app/assets/images/posts/9.jpg")),
+        created_at: (Time.now - rand(Time.now.month).month)
+      )
+      Post.create(
+        post_type: :normal,
+        title: "Nhà là nơi để về",
+        description: "Đừng đếm những gì bạn đã mất, hãy quý trọng những gì bạn đang có và lên kế hoạch cho những gì sẽ đạt được bởi quá khứ không bao giờ trở lại, nhưng tương lai có thể bù đắp cho mất mát.",
+        content: '<p><font face="Arial">1. Sự kh&aacute;c biệt giữa qu&aacute; khứ, hiện tại v&agrave; tương lai chỉ l&agrave; một ảo tưởng dai dẳng đến ngoan cố.</font><br />
+          <br />
+          <font face="Arial">(Albert Einstein)</font><br />
+          <br />
+          <font face="Arial">2. Tương lai của bạn phụ thuộc v&agrave;o rất nhiều điều, nhưng chủ yếu l&agrave; v&agrave;o bạn.</font><br />
+          <br />
+          <font face="Arial">(Frank Tyger)</font><br />
+          <br />
+          <font face="Arial">3. Lịch sử l&agrave; g&igrave;? Đ&oacute; l&agrave; tiếng vọng của qu&aacute; khứ trong tương lai v&agrave; l&agrave; &aacute;nh phản chiếu của tương lai tr&ecirc;n qu&aacute; khứ.</font><br />
+          <br />
+          <font face="Arial">(Victor Hugo)</font><br />
+          <br />
+          <font face="Arial">4. Đừng bao giờ để đến ng&agrave;y mai những việc m&agrave; bạn c&oacute; thể để đến ng&agrave;y kia.</font><br />
+          <br />
+          <font face="Arial">(Mark Twain)</font><br />
+          <br />
+          <font face="Arial">5. Qu&aacute; khứ l&agrave; tro t&agrave;n; tương lai l&agrave; gỗ. Chỉ ng&agrave;y h&ocirc;m nay l&agrave; lửa s&aacute;ng ch&oacute;i l&ograve;a.</font><br />
+          &nbsp;</p>
+
+          <p><font face="Arial"><img alt="Bạn có thật sự hiểu về tương lai chưa?" src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_12/Ngay_1/Images/ban-co-that-su-hieu-ve-tuong-lai-chua.jpg" /></font></p>
+
+          <p><br />
+          <font face="Arial">(Ngạn ngữ Eskimo)</font><br />
+          <br />
+          <font face="Arial">6. Tương lai phụ thuộc v&agrave;o điều ch&uacute;ng ta l&agrave;m trong hiện tại.</font><br />
+          <br />
+          <font face="Arial">(Mahatma Gandhi)</font><br />
+          <br />
+          <font face="Arial">7. T&ocirc;i chẳng bao giờ nghĩ tới tương lai &ndash; n&oacute; lu&ocirc;n lu&ocirc;n đến đủ sớm.</font><br />
+          <br />
+          <font face="Arial">(Albert Einstein)</font><br />
+          <br />
+          <font face="Arial">8. Thế giới đầy những kẻ m&agrave; quan điểm về một tương lai thỏa m&atilde;n thực chất l&agrave; sự quay trở lại qu&aacute; khứ đầy l&yacute; tưởng.</font><br />
+          <br />
+          <font face="Arial">(Robertson Davies)</font><br />
+          <br />
+          <font face="Arial">9. Mối đe dọa lớn nhất hướng tới tương lai l&agrave; sự thờ ơ.</font><br />
+          <br />
+          <font face="Arial">(Khuyết danh)</font><br />
+          <br />
+          <font face="Arial">10. Đừng đếm những g&igrave; bạn đ&atilde; mất, h&atilde;y qu&yacute; trọng những g&igrave; bạn đang c&oacute; v&agrave; l&ecirc;n kế hoạch cho những g&igrave; sẽ đạt được bởi qu&aacute; khứ kh&ocirc;ng bao giờ trở lại, nhưng tương lai c&oacute; thể b&ugrave; đắp cho mất m&aacute;t.</font><br />
+          <br />
+          <font face="Arial">(Khuyết danh)</font><br />
+          <br />
+          <font face="Arial">11. Tương lai c&oacute; rất nhiều t&ecirc;n: Với kẻ yếu, n&oacute; l&agrave; Điều kh&ocirc;ng thể đạt được. Đối với người hay sợ h&atilde;i, n&oacute; l&agrave; Điều chưa biết. Với ai dũng cảm, n&oacute; l&agrave; Cơ hội.</font><br />
+          <br />
+          <font face="Arial">(Victor Hugo)</font><br />
+          <br />
+          <font face="Arial">12. T&ocirc;i chẳng c&oacute; g&igrave; để l&agrave;m với qu&aacute; khứ; với tương lai cũng vậy. T&ocirc;i sống trong hiện tại.</font><br />
+          <br />
+          <font face="Arial">(Ralph Waldo Emerson)</font><br />
+          <br />
+          <font face="Arial">13. Sống trong hiện tại thật kh&oacute; khăn, sống trong tương lai l&agrave; v&ocirc; nghĩa, v&agrave; sống trong qu&aacute; khứ l&agrave; bất khả thi.</font><br />
+          <br />
+          <font face="Arial">(Frank Herbert)</font><br />
+          <br />
+          <font face="Arial"><strong>Blog Radio Sưu tầm v&agrave; tổng hợp.</strong></font></p>
+
+        ',
+        status: :accepted,
+        user_id: 11,
+        category_id: 4,
+        image: File.open(File.join(Rails.root, "app/assets/images/posts/15.jpg")),
+        created_at: (Time.now - rand(Time.now.month).month)
+      )
+      Post.create(
+        post_type: :normal,
+        title: "Những câu nói bất hủ của các vĩ nhân thế giới",
+        description: "Đừng đếm những gì bạn đã mất, hãy quý trọng những gì bạn đang có và lên kế hoạch cho những gì sẽ đạt được bởi quá khứ không bao giờ trở lại, nhưng tương lai có thể bù đắp cho mất mát.",
+        content: '<p><font face="Arial">1. Sự kh&aacute;c biệt giữa qu&aacute; khứ, hiện tại v&agrave; tương lai chỉ l&agrave; một ảo tưởng dai dẳng đến ngoan cố.</font><br />
+          <br />
+          <font face="Arial">(Albert Einstein)</font><br />
+          <br />
+          <font face="Arial">2. Tương lai của bạn phụ thuộc v&agrave;o rất nhiều điều, nhưng chủ yếu l&agrave; v&agrave;o bạn.</font><br />
+          <br />
+          <font face="Arial">(Frank Tyger)</font><br />
+          <br />
+          <font face="Arial">3. Lịch sử l&agrave; g&igrave;? Đ&oacute; l&agrave; tiếng vọng của qu&aacute; khứ trong tương lai v&agrave; l&agrave; &aacute;nh phản chiếu của tương lai tr&ecirc;n qu&aacute; khứ.</font><br />
+          <br />
+          <font face="Arial">(Victor Hugo)</font><br />
+          <br />
+          <font face="Arial">4. Đừng bao giờ để đến ng&agrave;y mai những việc m&agrave; bạn c&oacute; thể để đến ng&agrave;y kia.</font><br />
+          <br />
+          <font face="Arial">(Mark Twain)</font><br />
+          <br />
+          <font face="Arial">5. Qu&aacute; khứ l&agrave; tro t&agrave;n; tương lai l&agrave; gỗ. Chỉ ng&agrave;y h&ocirc;m nay l&agrave; lửa s&aacute;ng ch&oacute;i l&ograve;a.</font><br />
+          &nbsp;</p>
+
+          <p><font face="Arial"><img alt="Bạn có thật sự hiểu về tương lai chưa?" src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_12/Ngay_1/Images/ban-co-that-su-hieu-ve-tuong-lai-chua.jpg" /></font></p>
+
+          <p><br />
+          <font face="Arial">(Ngạn ngữ Eskimo)</font><br />
+          <br />
+          <font face="Arial">6. Tương lai phụ thuộc v&agrave;o điều ch&uacute;ng ta l&agrave;m trong hiện tại.</font><br />
+          <br />
+          <font face="Arial">(Mahatma Gandhi)</font><br />
+          <br />
+          <font face="Arial">7. T&ocirc;i chẳng bao giờ nghĩ tới tương lai &ndash; n&oacute; lu&ocirc;n lu&ocirc;n đến đủ sớm.</font><br />
+          <br />
+          <font face="Arial">(Albert Einstein)</font><br />
+          <br />
+          <font face="Arial">8. Thế giới đầy những kẻ m&agrave; quan điểm về một tương lai thỏa m&atilde;n thực chất l&agrave; sự quay trở lại qu&aacute; khứ đầy l&yacute; tưởng.</font><br />
+          <br />
+          <font face="Arial">(Robertson Davies)</font><br />
+          <br />
+          <font face="Arial">9. Mối đe dọa lớn nhất hướng tới tương lai l&agrave; sự thờ ơ.</font><br />
+          <br />
+          <font face="Arial">(Khuyết danh)</font><br />
+          <br />
+          <font face="Arial">10. Đừng đếm những g&igrave; bạn đ&atilde; mất, h&atilde;y qu&yacute; trọng những g&igrave; bạn đang c&oacute; v&agrave; l&ecirc;n kế hoạch cho những g&igrave; sẽ đạt được bởi qu&aacute; khứ kh&ocirc;ng bao giờ trở lại, nhưng tương lai c&oacute; thể b&ugrave; đắp cho mất m&aacute;t.</font><br />
+          <br />
+          <font face="Arial">(Khuyết danh)</font><br />
+          <br />
+          <font face="Arial">11. Tương lai c&oacute; rất nhiều t&ecirc;n: Với kẻ yếu, n&oacute; l&agrave; Điều kh&ocirc;ng thể đạt được. Đối với người hay sợ h&atilde;i, n&oacute; l&agrave; Điều chưa biết. Với ai dũng cảm, n&oacute; l&agrave; Cơ hội.</font><br />
+          <br />
+          <font face="Arial">(Victor Hugo)</font><br />
+          <br />
+          <font face="Arial">12. T&ocirc;i chẳng c&oacute; g&igrave; để l&agrave;m với qu&aacute; khứ; với tương lai cũng vậy. T&ocirc;i sống trong hiện tại.</font><br />
+          <br />
+          <font face="Arial">(Ralph Waldo Emerson)</font><br />
+          <br />
+          <font face="Arial">13. Sống trong hiện tại thật kh&oacute; khăn, sống trong tương lai l&agrave; v&ocirc; nghĩa, v&agrave; sống trong qu&aacute; khứ l&agrave; bất khả thi.</font><br />
+          <br />
+          <font face="Arial">(Frank Herbert)</font><br />
+          <br />
+          <font face="Arial"><strong>Blog Radio Sưu tầm v&agrave; tổng hợp.</strong></font></p>
+
+        ',
+        status: :accepted,
+        user_id: 12,
+        category_id: 4,
+        image: File.open(File.join(Rails.root, "app/assets/images/posts/16.jpg")),
+        created_at: (Time.now - rand(Time.now.month).month)
+      )
+
+      Post.create(
+        post_type: :normal,
+        title: "\"Độc thân không cô đơn\" - Đừng để cô đơn làm chật trái tim mình!",
+        description: "Con gái mạnh mẽ, độc lập biết rằng cuộc sống không phải là những câu chuyện cổ tích để mơ mộng mà là những thử thách để vượt qua và trưởng thành hơn mỗi ngày dù đó có là các mối quan hệ bạn bè, tình cảm hay công việc đi chăng nữa. Thực tế là cách duy nhất để bạn có thể thực sự cảm thấy hạnh phúc.",
+        content: '<p><font face="Arial"><strong>1. Tự tạo niềm vui cho m&igrave;nh</strong></font><br />
+          <br />
+          <font face="Arial">Điều tuyệt vời nhất của c&ocirc; g&aacute;i ch&iacute;nh l&agrave; cuộc sống n&agrave;y lu&ocirc;n vui vẻ v&agrave; tr&agrave;n ngập tiếng cười. Học c&aacute;ch để tự tạo niềm vui cho ch&iacute;nh m&igrave;nh, thỏa m&atilde;n những g&igrave; m&igrave;nh muốn v&agrave; bỏ qua hết những buồn phiền đi, đ&oacute; mới l&agrave; cuộc sống đ&iacute;ch thực đ&oacute;.</font><br />
+          <br />
+          <font face="Arial"><strong>2. H&atilde;y t&ocirc;n trọng ch&iacute;nh m&igrave;nh</strong></font><br />
+          <br />
+          <font face="Arial">Tr&ecirc;n tất cả, bạn phải tự y&ecirc;u qu&yacute; v&agrave; tr&acirc;n trọng ch&iacute;nh bản th&acirc;n m&igrave;nh. V&igrave; nếu bạn kh&ocirc;ng tr&acirc;n trọng m&igrave;nh th&igrave; chẳng ai c&oacute; thể l&agrave;m như vậy.</font><br />
+          <br />
+          <font face="Arial"><strong>3. Lu&ocirc;n giữ cho vẻ bề ngo&agrave;i c&acirc;n đối v&agrave; khỏe mạnh</strong></font><br />
+          <br />
+          <font face="Arial">Để trở th&agrave;nh một người con g&aacute;i mạnh mẽ, độc lập th&igrave; kh&ocirc;ng chỉ l&agrave; việc chăm lo về mặt tinh thần m&agrave; bạn c&ograve;n phải c&oacute; một vẻ ngo&agrave;i v&agrave; sức khỏe thực sự vững v&agrave;ng. H&atilde;y đến ph&ograve;ng tập gym, ăn những thực phẩm tốt cho sức khỏe v&agrave; bạn sẽ cảm thấy tự tin hơn mỗi ng&agrave;y.</font><br />
+          &nbsp;</p>
+
+          <p><font face="Arial"><img alt=" Hãy là con gái chứ không phải là bánh bèo vô dụng" src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_10/Ngay_24/Images/hay-la-con-gai-chu-khong-phai-banh-beo-vo-dung1.jpg" /></font></p>
+
+          <p><br />
+          <font face="Arial"><strong>4. H&atilde;y l&agrave;m việc thật chăm chỉ</strong></font><br />
+          <br />
+          <font face="Arial">Con g&aacute;i mạnh mẽ, độc lập kh&ocirc;ng chỉ ngồi đ&oacute; v&agrave; chờ đợi. Họ l&agrave;m việc chăm chỉ để theo đuổi những giấc mơ v&agrave; đam m&ecirc; của bản th&acirc;n.</font><br />
+          <br />
+          <font face="Arial"><strong>5. Đừng bao giờ đứng y&ecirc;n</strong></font><br />
+          <br />
+          <font face="Arial">D&ugrave; cho đ&oacute; l&agrave; c&ocirc;ng việc hay cuộc sống của bạn, đừng bao giờ đứng y&ecirc;n v&agrave; chấp nhận những điều nhỏ b&eacute; hơn những g&igrave; m&agrave; bạn xứng đ&aacute;ng c&oacute; được. Nếu kh&ocirc;ng thực sự cảm thấy vui vẻ v&agrave; hạnh ph&uacute;c, h&atilde;y bước tiếp.</font><br />
+          <br />
+          <font face="Arial"><strong>6. H&atilde;y thực tế trong cuộc sống v&agrave; c&aacute;c mối quan hệ</strong></font><br />
+          <br />
+          <font face="Arial">Con g&aacute;i mạnh mẽ, độc lập biết rằng cuộc sống kh&ocirc;ng phải l&agrave; những c&acirc;u chuyện cổ t&iacute;ch để mơ mộng m&agrave; l&agrave; những thử th&aacute;ch để vượt qua v&agrave; trưởng th&agrave;nh hơn mỗi ng&agrave;y d&ugrave; đ&oacute; c&oacute; l&agrave; c&aacute;c mối quan hệ bạn b&egrave;, t&igrave;nh cảm hay c&ocirc;ng việc đi chăng nữa. Thực tế l&agrave; c&aacute;ch duy nhất để bạn c&oacute; thể thực sự cảm thấy hạnh ph&uacute;c.</font><br />
+          <br />
+          <font face="Arial"><strong>7. H&atilde;y tr&aacute;nh xa sự bốc đồng</strong></font><br />
+          <br />
+          <font face="Arial">Bất kỳ một c&ocirc; n&agrave;ng độc lập n&agrave;o cũng đều suy nghĩ thật kỹ trước khi h&agrave;nh động d&ugrave; đ&oacute; l&agrave; chuyện nhỏ hay thực sự lớn. V&igrave; họ tin rằng: cuộc sống l&agrave; kết tinh của tất cả những quyết định, v&igrave; thế đừng bốc đồng với bất kỳ một sự lựa chọn n&agrave;o.</font><br />
+          <br />
+          <font face="Arial"><strong>8. H&atilde;y lờ đi những người chỉ mang đến sự ti&ecirc;u cực</strong></font><br />
+          <br />
+          <font face="Arial">Những kẻ ti&ecirc;u cực c&oacute; mặt ở khắp mọi nơi: từ trường học, c&ocirc;ng sở đến cả tr&ecirc;n c&aacute;c trang mạng x&atilde; hội m&agrave; bạn tham gia. V&agrave; c&aacute;c c&ocirc; n&agrave;ng mạnh mẽ, độc lập lu&ocirc;n chọn c&aacute;ch phớt lờ v&agrave; kh&ocirc;ng để lời n&oacute;i, h&agrave;nh động v&agrave; cả nguồn năng lượng ti&ecirc;u cực của những người n&agrave;y ảnh hưởng đến m&igrave;nh.</font><br />
+          <br />
+          <font face="Arial"><strong>9. C&oacute; một cuộc sống ri&ecirc;ng cho bản th&acirc;n</strong></font><br />
+          <br />
+          <font face="Arial">Đừng d&agrave;nh tất cả thời gian của m&igrave;nh để loay hoay b&ecirc;n cạnh một ai đ&oacute; hay một điều g&igrave; đ&oacute;. V&igrave; ai cũng cần c&oacute; một cuộc sống ri&ecirc;ng, một kh&ocirc;ng gian ri&ecirc;ng d&agrave;nh cho m&igrave;nh để nghỉ ngơi v&agrave; t&igrave;m lại hơi thở sau chuỗi ng&agrave;y tất bật với c&ocirc;ng việc v&agrave; c&aacute;c mối quan hệ. H&atilde;y c&oacute; một cuộc sống ri&ecirc;ng cho bản th&acirc;n v&agrave; bạn sẽ trở n&ecirc;n thực sự độc lập.</font><br />
+          &nbsp;</p>
+
+          <p><font face="Arial"><img alt=" Hãy là con gái chứ không phải là bánh bèo vô dụng" src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_10/Ngay_24/Images/hay-la-con-gai-chu-khong-phai-banh-beo-vo-dung2.jpg" /></font></p>
+
+          <p><br />
+          <font face="Arial"><strong>10. Tự giải quyết mọi vấn đề c&aacute; nh&acirc;n của m&igrave;nh</strong></font><br />
+          <br />
+          <font face="Arial">Tuy hỏi &yacute; kiến hay tham khảo lời khuy&ecirc;n của người kh&aacute;c th&igrave; vẫn lu&ocirc;n cần thiết nhưng h&atilde;y nhớ rằng n&uacute;t do bạn thắt lại th&igrave; chỉ c&oacute; m&igrave;nh bạn c&oacute; thể gỡ ra được. Đừng bao giờ biến người kh&aacute;c th&agrave;nh c&ocirc;ng cụ r&agrave; so&aacute;t v&agrave; sửa lỗi cho mọi vấn đề của cuộc đời bạn.</font><br />
+          <br />
+          <font face="Arial"><strong>11. B&igrave;nh tĩnh. Phải lu&ocirc;n giữ được sự b&igrave;nh tĩnh</strong></font><br />
+          <br />
+          <font face="Arial">Ph&aacute;t đi&ecirc;n v&agrave; c&aacute;u tiết với một chuyện sai tr&aacute;i n&agrave;o đ&oacute; quả thật rất dễ d&agrave;ng, dễ hơn việc giữ b&igrave;nh tĩnh rất nhiều. Nhưng những c&ocirc; n&agrave;ng mạnh mẽ, độc lập th&igrave; kh&ocirc;ng l&agrave;m như vậy v&igrave; họ c&oacute; thể giải quyết tất cả mọi t&igrave;nh huống khủng khiếp nhất với một tr&aacute;i tim b&igrave;nh thản nhất v&agrave; một t&acirc;m thế đĩnh đạc nhất.</font><br />
+          <br />
+          <font face="Arial"><strong>12. H&atilde;y tự đứng l&ecirc;n v&igrave; m&igrave;nh khi cần thiết</strong></font><br />
+          <br />
+          <font face="Arial">Những c&ocirc; n&agrave;ng mạnh mẽ, độc lập lu&ocirc;n biết đứng l&ecirc;n để tự bảo vệ cho quyền lợi v&agrave; hạnh ph&uacute;c của ch&iacute;nh bản th&acirc;n m&igrave;nh chứ kh&ocirc;ng chỉ biết tr&ocirc;ng chờ v&agrave;o số phận hay v&agrave;o sức mạnh của người kh&aacute;c.</font><br />
+          <br />
+          <font face="Arial"><strong>13. C&oacute; thể tự l&agrave;m mọi thứ nếu c&oacute; thể</strong></font><br />
+          <br />
+          <font face="Arial">Đ&acirc;y l&agrave; c&aacute;ch m&agrave; bạn độc lập theo đ&uacute;ng nghĩa đen của từ n&agrave;y. H&atilde;y tự t&igrave;m kiếm v&agrave; mang đến cho m&igrave;nh bất cứ thứ g&igrave; m&agrave; bạn cần, dẫu đ&oacute; c&oacute; l&agrave; tiền bạc, một ng&ocirc;i nh&agrave; hay thậm ch&iacute; l&agrave; hạnh ph&uacute;c. Điều n&agrave;y cũng gi&uacute;p bạn c&oacute; thể đỡ đần cho gia đ&igrave;nh v&agrave; người đ&agrave;n &ocirc;ng m&igrave;nh y&ecirc;u thương, chứng minh cho anh ấy biết rằng bạn y&ecirc;u kh&ocirc;ng phải v&igrave; tiền t&agrave;i, danh vọng m&agrave; y&ecirc;u ch&iacute;nh con người anh ấy.</font><br />
+          <br />
+          <font face="Arial"><strong>Blog Radio Tổng hợp.</strong></font></p>
+          ',
+        status: :accepted,
+        user_id: 11,
+        category_id: 18,
+        image: File.open(File.join(Rails.root, "app/assets/images/posts/18.jpg")),
+        created_at: (Time.now - rand(Time.now.month).month)
+      )
+
+      Post.create(
+        post_type: :normal,
+        title: "Mở lòng và yêu đi, bởi vì ai cũng cần được yêu thương",
+        description: "Con gái mạnh mẽ, độc lập biết rằng cuộc sống không phải là những câu chuyện cổ tích để mơ mộng mà là những thử thách để vượt qua và trưởng thành hơn mỗi ngày dù đó có là các mối quan hệ bạn bè, tình cảm hay công việc đi chăng nữa. Thực tế là cách duy nhất để bạn có thể thực sự cảm thấy hạnh phúc.",
+        content: '<p><font face="Arial"><strong>1. Tự tạo niềm vui cho m&igrave;nh</strong></font><br />
+          <br />
+          <font face="Arial">Điều tuyệt vời nhất của c&ocirc; g&aacute;i ch&iacute;nh l&agrave; cuộc sống n&agrave;y lu&ocirc;n vui vẻ v&agrave; tr&agrave;n ngập tiếng cười. Học c&aacute;ch để tự tạo niềm vui cho ch&iacute;nh m&igrave;nh, thỏa m&atilde;n những g&igrave; m&igrave;nh muốn v&agrave; bỏ qua hết những buồn phiền đi, đ&oacute; mới l&agrave; cuộc sống đ&iacute;ch thực đ&oacute;.</font><br />
+          <br />
+          <font face="Arial"><strong>2. H&atilde;y t&ocirc;n trọng ch&iacute;nh m&igrave;nh</strong></font><br />
+          <br />
+          <font face="Arial">Tr&ecirc;n tất cả, bạn phải tự y&ecirc;u qu&yacute; v&agrave; tr&acirc;n trọng ch&iacute;nh bản th&acirc;n m&igrave;nh. V&igrave; nếu bạn kh&ocirc;ng tr&acirc;n trọng m&igrave;nh th&igrave; chẳng ai c&oacute; thể l&agrave;m như vậy.</font><br />
+          <br />
+          <font face="Arial"><strong>3. Lu&ocirc;n giữ cho vẻ bề ngo&agrave;i c&acirc;n đối v&agrave; khỏe mạnh</strong></font><br />
+          <br />
+          <font face="Arial">Để trở th&agrave;nh một người con g&aacute;i mạnh mẽ, độc lập th&igrave; kh&ocirc;ng chỉ l&agrave; việc chăm lo về mặt tinh thần m&agrave; bạn c&ograve;n phải c&oacute; một vẻ ngo&agrave;i v&agrave; sức khỏe thực sự vững v&agrave;ng. H&atilde;y đến ph&ograve;ng tập gym, ăn những thực phẩm tốt cho sức khỏe v&agrave; bạn sẽ cảm thấy tự tin hơn mỗi ng&agrave;y.</font><br />
+          &nbsp;</p>
+
+          <p><font face="Arial"><img alt=" Hãy là con gái chứ không phải là bánh bèo vô dụng" src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_10/Ngay_24/Images/hay-la-con-gai-chu-khong-phai-banh-beo-vo-dung1.jpg" /></font></p>
+
+          <p><br />
+          <font face="Arial"><strong>4. H&atilde;y l&agrave;m việc thật chăm chỉ</strong></font><br />
+          <br />
+          <font face="Arial">Con g&aacute;i mạnh mẽ, độc lập kh&ocirc;ng chỉ ngồi đ&oacute; v&agrave; chờ đợi. Họ l&agrave;m việc chăm chỉ để theo đuổi những giấc mơ v&agrave; đam m&ecirc; của bản th&acirc;n.</font><br />
+          <br />
+          <font face="Arial"><strong>5. Đừng bao giờ đứng y&ecirc;n</strong></font><br />
+          <br />
+          <font face="Arial">D&ugrave; cho đ&oacute; l&agrave; c&ocirc;ng việc hay cuộc sống của bạn, đừng bao giờ đứng y&ecirc;n v&agrave; chấp nhận những điều nhỏ b&eacute; hơn những g&igrave; m&agrave; bạn xứng đ&aacute;ng c&oacute; được. Nếu kh&ocirc;ng thực sự cảm thấy vui vẻ v&agrave; hạnh ph&uacute;c, h&atilde;y bước tiếp.</font><br />
+          <br />
+          <font face="Arial"><strong>6. H&atilde;y thực tế trong cuộc sống v&agrave; c&aacute;c mối quan hệ</strong></font><br />
+          <br />
+          <font face="Arial">Con g&aacute;i mạnh mẽ, độc lập biết rằng cuộc sống kh&ocirc;ng phải l&agrave; những c&acirc;u chuyện cổ t&iacute;ch để mơ mộng m&agrave; l&agrave; những thử th&aacute;ch để vượt qua v&agrave; trưởng th&agrave;nh hơn mỗi ng&agrave;y d&ugrave; đ&oacute; c&oacute; l&agrave; c&aacute;c mối quan hệ bạn b&egrave;, t&igrave;nh cảm hay c&ocirc;ng việc đi chăng nữa. Thực tế l&agrave; c&aacute;ch duy nhất để bạn c&oacute; thể thực sự cảm thấy hạnh ph&uacute;c.</font><br />
+          <br />
+          <font face="Arial"><strong>7. H&atilde;y tr&aacute;nh xa sự bốc đồng</strong></font><br />
+          <br />
+          <font face="Arial">Bất kỳ một c&ocirc; n&agrave;ng độc lập n&agrave;o cũng đều suy nghĩ thật kỹ trước khi h&agrave;nh động d&ugrave; đ&oacute; l&agrave; chuyện nhỏ hay thực sự lớn. V&igrave; họ tin rằng: cuộc sống l&agrave; kết tinh của tất cả những quyết định, v&igrave; thế đừng bốc đồng với bất kỳ một sự lựa chọn n&agrave;o.</font><br />
+          <br />
+          <font face="Arial"><strong>8. H&atilde;y lờ đi những người chỉ mang đến sự ti&ecirc;u cực</strong></font><br />
+          <br />
+          <font face="Arial">Những kẻ ti&ecirc;u cực c&oacute; mặt ở khắp mọi nơi: từ trường học, c&ocirc;ng sở đến cả tr&ecirc;n c&aacute;c trang mạng x&atilde; hội m&agrave; bạn tham gia. V&agrave; c&aacute;c c&ocirc; n&agrave;ng mạnh mẽ, độc lập lu&ocirc;n chọn c&aacute;ch phớt lờ v&agrave; kh&ocirc;ng để lời n&oacute;i, h&agrave;nh động v&agrave; cả nguồn năng lượng ti&ecirc;u cực của những người n&agrave;y ảnh hưởng đến m&igrave;nh.</font><br />
+          <br />
+          <font face="Arial"><strong>9. C&oacute; một cuộc sống ri&ecirc;ng cho bản th&acirc;n</strong></font><br />
+          <br />
+          <font face="Arial">Đừng d&agrave;nh tất cả thời gian của m&igrave;nh để loay hoay b&ecirc;n cạnh một ai đ&oacute; hay một điều g&igrave; đ&oacute;. V&igrave; ai cũng cần c&oacute; một cuộc sống ri&ecirc;ng, một kh&ocirc;ng gian ri&ecirc;ng d&agrave;nh cho m&igrave;nh để nghỉ ngơi v&agrave; t&igrave;m lại hơi thở sau chuỗi ng&agrave;y tất bật với c&ocirc;ng việc v&agrave; c&aacute;c mối quan hệ. H&atilde;y c&oacute; một cuộc sống ri&ecirc;ng cho bản th&acirc;n v&agrave; bạn sẽ trở n&ecirc;n thực sự độc lập.</font><br />
+          &nbsp;</p>
+
+          <p><font face="Arial"><img alt=" Hãy là con gái chứ không phải là bánh bèo vô dụng" src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_10/Ngay_24/Images/hay-la-con-gai-chu-khong-phai-banh-beo-vo-dung2.jpg" /></font></p>
+
+          <p><br />
+          <font face="Arial"><strong>10. Tự giải quyết mọi vấn đề c&aacute; nh&acirc;n của m&igrave;nh</strong></font><br />
+          <br />
+          <font face="Arial">Tuy hỏi &yacute; kiến hay tham khảo lời khuy&ecirc;n của người kh&aacute;c th&igrave; vẫn lu&ocirc;n cần thiết nhưng h&atilde;y nhớ rằng n&uacute;t do bạn thắt lại th&igrave; chỉ c&oacute; m&igrave;nh bạn c&oacute; thể gỡ ra được. Đừng bao giờ biến người kh&aacute;c th&agrave;nh c&ocirc;ng cụ r&agrave; so&aacute;t v&agrave; sửa lỗi cho mọi vấn đề của cuộc đời bạn.</font><br />
+          <br />
+          <font face="Arial"><strong>11. B&igrave;nh tĩnh. Phải lu&ocirc;n giữ được sự b&igrave;nh tĩnh</strong></font><br />
+          <br />
+          <font face="Arial">Ph&aacute;t đi&ecirc;n v&agrave; c&aacute;u tiết với một chuyện sai tr&aacute;i n&agrave;o đ&oacute; quả thật rất dễ d&agrave;ng, dễ hơn việc giữ b&igrave;nh tĩnh rất nhiều. Nhưng những c&ocirc; n&agrave;ng mạnh mẽ, độc lập th&igrave; kh&ocirc;ng l&agrave;m như vậy v&igrave; họ c&oacute; thể giải quyết tất cả mọi t&igrave;nh huống khủng khiếp nhất với một tr&aacute;i tim b&igrave;nh thản nhất v&agrave; một t&acirc;m thế đĩnh đạc nhất.</font><br />
+          <br />
+          <font face="Arial"><strong>12. H&atilde;y tự đứng l&ecirc;n v&igrave; m&igrave;nh khi cần thiết</strong></font><br />
+          <br />
+          <font face="Arial">Những c&ocirc; n&agrave;ng mạnh mẽ, độc lập lu&ocirc;n biết đứng l&ecirc;n để tự bảo vệ cho quyền lợi v&agrave; hạnh ph&uacute;c của ch&iacute;nh bản th&acirc;n m&igrave;nh chứ kh&ocirc;ng chỉ biết tr&ocirc;ng chờ v&agrave;o số phận hay v&agrave;o sức mạnh của người kh&aacute;c.</font><br />
+          <br />
+          <font face="Arial"><strong>13. C&oacute; thể tự l&agrave;m mọi thứ nếu c&oacute; thể</strong></font><br />
+          <br />
+          <font face="Arial">Đ&acirc;y l&agrave; c&aacute;ch m&agrave; bạn độc lập theo đ&uacute;ng nghĩa đen của từ n&agrave;y. H&atilde;y tự t&igrave;m kiếm v&agrave; mang đến cho m&igrave;nh bất cứ thứ g&igrave; m&agrave; bạn cần, dẫu đ&oacute; c&oacute; l&agrave; tiền bạc, một ng&ocirc;i nh&agrave; hay thậm ch&iacute; l&agrave; hạnh ph&uacute;c. Điều n&agrave;y cũng gi&uacute;p bạn c&oacute; thể đỡ đần cho gia đ&igrave;nh v&agrave; người đ&agrave;n &ocirc;ng m&igrave;nh y&ecirc;u thương, chứng minh cho anh ấy biết rằng bạn y&ecirc;u kh&ocirc;ng phải v&igrave; tiền t&agrave;i, danh vọng m&agrave; y&ecirc;u ch&iacute;nh con người anh ấy.</font><br />
+          <br />
+          <font face="Arial"><strong>Blog Radio Tổng hợp.</strong></font></p>
+          ',
+        status: :accepted,
+        user_id: 13,
+        category_id: 2,
+        image: File.open(File.join(Rails.root, "app/assets/images/posts/17.jpg")),
+        created_at: (Time.now - rand(Time.now.month).month)
+      )
+
       puts "Creating accepted posts - audio"
 
       Post.create(
@@ -615,8 +1039,8 @@ namespace :db do
         content: '<p><strong><img src="http://media3.nhacvietplus.com.vn/Upload/CMS/Nam_2016/Thang_11/Ngay_8/Images/BuongTayCungLaMotCachDeYeuThuong.jpg" /></strong></p>
           ',
         status: :accepted,
-        user_id: 11,
-        category_id: 18,
+        user_id: 12,
+        category_id: 1,
         image: File.open(File.join(Rails.root, "app/assets/images/posts/11.jpg")),
         audio: File.open(File.join(Rails.root, "app/assets/audio/1.mp3")),
         created_at: (Time.now - rand(Time.now.month).month)
@@ -668,7 +1092,7 @@ namespace :db do
           ',
         status: :accepted,
         user_id: 11,
-        category_id: 18,
+        category_id: 7,
         image: File.open(File.join(Rails.root, "app/assets/images/posts/13.jpg")),
         audio: File.open(File.join(Rails.root, "app/assets/audio/1.mp3")),
         created_at: (Time.now - rand(Time.now.month).month)
@@ -716,7 +1140,7 @@ namespace :db do
           ',
         status: :accepted,
         user_id: 11,
-        category_id: 18,
+        category_id: 8,
         image: File.open(File.join(Rails.root, "app/assets/images/posts/12.jpg")),
         audio: File.open(File.join(Rails.root, "app/assets/audio/1.mp3")),
         created_at: (Time.now - rand(Time.now.month).month)
@@ -753,7 +1177,7 @@ namespace :db do
 
       puts "Creating post like"
       (1..15).each do |post_id|
-        rand(20).times do |like|
+        rand(10).times do |like|
           Post.find(post_id).likes.create user_id: rand(14)
         end
       end

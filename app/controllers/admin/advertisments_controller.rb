@@ -31,6 +31,11 @@ class Admin::AdvertismentsController < Admin::BaseController
 
   def destroy
     ids = params[:advertisment_ids].nil? ? params[:id] : params[:advertisment_ids]
+
+    if params[:post_ids].present?
+      authorize! :destroy_all, Advertisment
+    end
+
     if ids.nil?
       flash[:danger] = t ".must_select"
     else

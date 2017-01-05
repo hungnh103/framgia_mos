@@ -24,25 +24,27 @@
             class="tab-pane fade <%= 'in active' if params[:action] == 'show' %>">
             <h3><%= @category.name %></h3>
           </div>
-          <div id="category-edit"
-            class="tab-pane fade <%= 'in active' if params[:action] == 'update' %>">
-            <h3><%= t ".edit" + " " + @category.name %></h3>
-            <div class="category-form">
-              <%= simple_form_for [:admin, @category] do |f| %>
-                <%= f.error_notification %>
-                <%= f.input :name, input_html: {class: "form-control"} %>
-                <%= f.input :description, as: :text, input_html: {class: "form-control"} %>
-                <%= f.label :parent_id, t(".category_parent") %>
-                <select class="selectpicker" data-size="9" data-live-search="true"
-                  name="category[parent_id]" id="category_parent_id">
-                  <option value=""><%= t ".parent" %></option>
-                  <%= render "shared/select_category", categories: @nested_categories %>
-                </select>
-                <br>
-                <%= f.button :submit, class: "btn btn-primary" %>
-              <% end %>
+          <% if can? :update, @category %>
+            <div id="category-edit"
+              class="tab-pane fade <%= 'in active' if params[:action] == 'update' %>">
+              <h3><%= t ".edit" + " " + @category.name %></h3>
+              <div class="category-form">
+                <%= simple_form_for [:admin, @category] do |f| %>
+                  <%= f.error_notification %>
+                  <%= f.input :name, input_html: {class: "form-control"} %>
+                  <%= f.input :description, as: :text, input_html: {class: "form-control"} %>
+                  <%= f.label :parent_id, t(".category_parent") %>
+                  <select class="selectpicker" data-size="9" data-live-search="true"
+                    name="category[parent_id]" id="category_parent_id">
+                    <option value=""><%= t ".parent" %></option>
+                    <%= render "shared/select_category", categories: @nested_categories %>
+                  </select>
+                  <br>
+                  <%= f.button :submit, class: "btn btn-primary" %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>

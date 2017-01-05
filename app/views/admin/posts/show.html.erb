@@ -5,17 +5,18 @@
       <%= t ".show" %>
     </a>
   </li>
-  <li class="<%= 'active' if params[:action] == 'update' %>">
-    <a data-toggle="tab" href="#post-edit">
-      <i class="glyphicon glyphicon-pencil"></i>
-      <%= t ".edit" %>
-    </a>
-  </li>
+    <% if can? :update, @post %>
+      <li class="<%= 'active' if params[:action] == 'update' %>">
+        <a data-toggle="tab" href="#post-edit">
+          <i class="glyphicon glyphicon-pencil"></i>
+          <%= t ".edit" %>
+        </a>
+      </li>
+    <% end %>
 </ul>
 
 <div class="clearfix"></div>
 <div class="box">
-
   <div class="box-body">
 
     <div class="tab-content">
@@ -26,8 +27,9 @@
           <%= @post.content.html_safe %>
         </div>
       </div>
-      <div id="post-edit"
-        class="tab-pane fade <%= 'in active' if params[:action] == 'update' %>">
+      <% if can? :update, @post %>
+        <div id="post-edit" class="tab-pane fade
+          <%= 'in active' if params[:action] == 'update' %>">
         <h3><%= t ".edit" %></h3>
         <div class="post-form">
           <%= simple_form_for [:admin, @post], html: {multipart: true} do |f| %>
@@ -80,18 +82,21 @@
           <% end %>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
 <% case @post.status %>
 <% when "pending" %>
-  <%= form_tag(controller: "accept_post", action: "update") do %>
-    <%= hidden_field_tag :id, @post.id %>
-    <%= hidden_field_tag :accepted_by, current_admin_user.name %>
-    <div class="form-inline">
-      <%= submit_tag t(".accept"), class: "btn btn-primary" %>
-      <%= submit_tag t(".reject"), class: "btn btn-default" %>
-    </div>
+  <% if can? :update, @post %>
+    <%= form_tag(controller: "accept_post", action: "update") do %>
+      <%= hidden_field_tag :id, @post.id %>
+      <%= hidden_field_tag :accepted_by, current_admin_user.name %>
+      <div class="form-inline">
+        <%= submit_tag t(".accept"), class: "btn btn-primary" %>
+        <%= submit_tag t(".reject"), class: "btn btn-default" %>
+      </div>
+    <% end %>
   <% end %>
 <% when "accepted" %>
   <span>

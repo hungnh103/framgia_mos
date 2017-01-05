@@ -8,12 +8,14 @@
             <%= t ".index" %>
           </a>
         </li>
-        <li class="<%= 'active' if params[:action] == 'create' %>">
-          <a data-toggle="tab" href="#advertisment-new">
-            <i class="glyphicon glyphicon-plus"></i>
-            <%= t ".new" %>
-          </a>
-        </li>
+        <% if can? :create, Advertisment %>
+          <li class="<%= 'active' if params[:action] == 'create' %>">
+            <a data-toggle="tab" href="#advertisment-new">
+              <i class="glyphicon glyphicon-plus"></i>
+              <%= t ".new" %>
+            </a>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div class="clearfix"></div>
@@ -37,10 +39,12 @@
             <%= form_tag admin_destroy_multi_advertisment_path,
               method: :delete, data: {confirm: t(".are_you_sure")},
               id: "formDeleteMultipleAdvertisment" do %>
-              <div class="pull-right">
-                <%= submit_tag t(".delete_selected"),
-                  class: "btn btn-primary btn-delete-advertisments" %>
-              </div>
+              <% if can? [:destroy, :destroy_all], Advertisment %>
+                <div class="pull-right">
+                  <%= submit_tag t(".delete_selected"),
+                    class: "btn btn-primary btn-delete-advertisments" %>
+                </div>
+              <% end %>
               <div class="clearfix"></div>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover">
@@ -65,19 +69,20 @@
                         <td><%= link_to advertisment.description, [:admin, advertisment] %></td>
                         <td><%= link_to advertisment.url, [:admin, advertisment] %></td>
                         <td>
-                          <%= link_to "#" do %>
+                          <%= link_to [:admin, advertisment] do %>
                             <span class="glyphicon glyphicon-info-sign"></span>
                           <% end %>
-                          <%= link_to "#" do %>
-                            <span class="glyphicon glyphicon-pencil"></span>
-                          <% end %>
-                          <%= link_to [:admin, advertisment], method: :delete,
-                            data: {confirm: t(".delete_confirm")} do %>
-                            <span class="glyphicon glyphicon-trash"></span>
+                          <% if can? :destroy, advertisment %>
+                            <%= link_to [:admin, advertisment], method: :delete,
+                              data: {confirm: t(".delete_confirm")} do %>
+                              <span class="glyphicon glyphicon-trash"></span>
+                            <% end %>
                           <% end %>
                         </td>
-                        <td><%= check_box_tag "advertisment_ids[]", advertisment.id,
-                          false, class: "advertisment_ids_" %></td>
+                        <% if can? [:destroy, :destroy_all], Advertisment %>
+                          <td><%= check_box_tag "advertisment_ids[]", advertisment.id,
+                            false, class: "advertisment_ids_" %></td>
+                        <% end %>
                       </tr>
                     <% end %>
                   </tbody>
@@ -87,23 +92,25 @@
                 pagination_class: "pagination-sm" %>
             <% end %>
           </div>
-          <div id="advertisment-new"
-            class="tab-pane fade <%= 'in active' if params[:action] == 'create' %>">
-            <h3><%= t ".new_advertisment" %></h3>
-            <div class="advertisment-form">
-              <%= simple_form_for [:admin, @advertisment] do |f| %>
-                <%= f.error_notification %>
-                <%= f.input :description, as: :text,
-                  input_html: {class: "form-control"} %>
-                <%= f.input :url, as: :text,
-                  input_html: {class: "form-control"} %>
-                <%= f.input :image, as: :file,
-                  input_html: {class: "form-control"} %>
-                <br>
-                <%= f.button :submit, class: "btn btn-primary" %>
-              <% end %>
+          <% if can? :create, Advertisment %>
+            <div id="advertisment-new"
+              class="tab-pane fade <%= 'in active' if params[:action] == 'create' %>">
+              <h3><%= t ".new_advertisment" %></h3>
+              <div class="advertisment-form">
+                <%= simple_form_for [:admin, @advertisment] do |f| %>
+                  <%= f.error_notification %>
+                  <%= f.input :description, as: :text,
+                    input_html: {class: "form-control"} %>
+                  <%= f.input :url, as: :text,
+                    input_html: {class: "form-control"} %>
+                  <%= f.input :image, as: :file,
+                    input_html: {class: "form-control"} %>
+                  <br>
+                  <%= f.button :submit, class: "btn btn-primary" %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>

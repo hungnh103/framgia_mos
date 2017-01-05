@@ -33,10 +33,12 @@
             <%= form_tag admin_destroy_multi_confession_path, method: :delete,
               data: {confirm: t(".confirm_delete_multi")},
               id: "formDeleteMultipleConfession" do %>
-              <div class="pull-right">
-                <%= submit_tag t(".delete_multi"),
-                  class: "btn btn-primary btn-delete-confessions" %>
-              </div>
+              <% if can? [:destroy, :destroy_all], Confession %>
+                <div class="pull-right">
+                  <%= submit_tag t(".delete_multi"),
+                    class: "btn btn-primary btn-delete-confessions" %>
+                </div>
+              <% end %>
               <div class="clearfix"></div>
               <div class="table-responsive">
                 <table class="table table-hovered">
@@ -49,10 +51,14 @@
                       <%= sort_link @search, :created_at, t(".created_at") %>
                     </th>
                     <th class="column-status-width"><%= t(".status") %></th>
-                    <th class="column-action-width"><%= t ".action" %></th>
-                    <th>
-                      <input type="checkbox" id="selectAll" value="selectAll">
-                    </th>
+                    <% if can? :destory, Confession %>
+                      <th class="column-action-width"><%= t ".action" %></th>
+                      <% if can? :destroy_all, Confession %>
+                        <th>
+                          <input type="checkbox" id="selectAll" value="selectAll">
+                        </th>
+                      <% end %>
+                    <% end %>
                   </thead>
                   <tbody class="load-more-confession">
                     <% @confessions.each_with_index do |confession, index| %>
@@ -83,20 +89,24 @@
                             </label>
                           <% end %>
                         </td>
-                        <td>
-                          <ul class="menu-action">
-                            <li>
-                              <%= link_to [:admin, confession], method: :delete,
-                                data: {confirm: t(".delete_confirm")}, title: t(".tooltip_delete") do %>
-                                <span class="glyphicon glyphicon-trash"></span>
-                              <% end %>
-                            </li>
-                          </ul>
-                        </td>
-                        <td>
-                          <%= check_box_tag "confession_ids[]", confession.id, false,
-                            class: "confession_ids_" %>
-                        </td>
+                        <% if can? :destroy, confession %>
+                          <td>
+                            <ul class="menu-action">
+                              <li>
+                                <%= link_to [:admin, confession], method: :delete,
+                                  data: {confirm: t(".delete_confirm")}, title: t(".tooltip_delete") do %>
+                                  <span class="glyphicon glyphicon-trash"></span>
+                                <% end %>
+                              </li>
+                            </ul>
+                          </td>
+                          <% if can? :destroy_all, confession %>
+                            <td>
+                              <%= check_box_tag "confession_ids[]", confession.id, false,
+                                class: "confession_ids_" %>
+                            </td>
+                          <% end %>
+                        <% end %>
                       </tr>
                     <% end %>
                   </tbody>

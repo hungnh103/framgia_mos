@@ -6,12 +6,15 @@
       <%= t ".index" %>
     </a>
   </li>
-  <li class="<%= 'active' if params[:action] == 'create' %>">
-    <a data-toggle="tab" href="#post-new">
-      <i class="glyphicon glyphicon-plus"></i>
-      <%= t ".new" %>
-    </a>
-  </li>
+
+  <% if can? :create, Post %>
+    <li class="<%= 'active' if params[:action] == 'create' %>">
+      <a data-toggle="tab" href="#post-new">
+        <i class="glyphicon glyphicon-plus"></i>
+        <%= t ".new" %>
+      </a>
+    </li>
+  <% end %>
 </ul>
 <div class="box">
   <div class="box-body">
@@ -39,8 +42,10 @@
           method: :delete, data: {confirm: t(".are_you_sure")},
           id: "formDeleteMultiplePost" do %>
           <div class="pull-right">
-            <%= submit_tag t(".delete_selected"),
-              class: "btn btn-primary btn-delete-posts" %>
+            <% if can? [:destroy, :destroy_all], Post %>
+              <%= submit_tag t(".delete_selected"),
+                class: "btn btn-primary btn-delete-posts" %>
+            <% end %>
           </div>
           <div class="clearfix"></div>
           <div class="table-responsive">
@@ -56,9 +61,11 @@
                   </th>
                   <th class="column-status-width"><%= t ".status" %></th>
                   <th class="column-action-width"><%= t ".action" %></th>
-                  <th>
-                    <input type="checkbox" id="selectAll" value="selectAll">
-                  </th>
+                  <% if can? [:destroy, :destroy_all], Post %>
+                    <th>
+                      <input type="checkbox" id="selectAll" value="selectAll">
+                    </th>
+                  <% end %>
                 </tr>
               </thead>
               <tbody>
@@ -87,15 +94,19 @@
                       <%= link_to admin_post_path(post), title: t(".tooltip_show") do %>
                         <span class="glyphicon glyphicon-info-sign"></span>
                       <% end %>
-                      <%= link_to [:admin, post], method: :delete,
-                        "data-toggle": "tooltip", title: t(".tooltip_delete"),
-                        data: {confirm: t(".are_you_sure")}, name: "post_ids[]",
-                        value: post.id do %>
-                        <i class="glyphicon glyphicon-trash"></i>
+                      <% if can? :destroy, post %>
+                        <%= link_to [:admin, post], method: :delete,
+                          "data-toggle": "tooltip", title: t(".tooltip_delete"),
+                          data: {confirm: t(".are_you_sure")}, name: "post_ids[]",
+                          value: post.id do %>
+                          <i class="glyphicon glyphicon-trash"></i>
+                        <% end %>
                       <% end %>
                     </td>
-                    <td><%= check_box_tag "post_ids[]", post.id,
-                      false, class: "post_ids_" %></td>
+                    <% if can? [:destroy, :destroy_all], Post %>
+                      <td><%= check_box_tag "post_ids[]", post.id,
+                        false, class: "post_ids_" %></td>
+                    <% end %>
                   </tr>
                 <% end %>
               </tbody>
@@ -105,57 +116,59 @@
             pagination_class: "pagination-sm" %>
         </div>
       <% end %>
-      <div id="post-new"
-        class="tab-pane fade <%= 'in active' if params[:action] == 'create' %>">
-        <%= simple_form_for [:admin, @post], html: {multipart: true} do |f| %>
-          <%= render "shared/error_messages", object: f.object %>
-          <div class="fields">
-            <%= f.label :post_type %>
-            <%= f.select :post_type,
-              Post.post_types.keys.to_a,
-              {include_blank: false},
-              class: "form-control selectpicker", data: {"live-search": true} %>
-          </div>
+      <% if can? :create, Post %>
+        <div id="post-new"
+          class="tab-pane fade <%= 'in active' if params[:action] == 'create' %>">
+          <%= simple_form_for [:admin, @post], html: {multipart: true} do |f| %>
+            <%= render "shared/error_messages", object: f.object %>
+            <div class="fields">
+              <%= f.label :post_type %>
+              <%= f.select :post_type,
+                Post.post_types.keys.to_a,
+                {include_blank: false},
+                class: "form-control selectpicker", data: {"live-search": true} %>
+            </div>
 
-          <div class="field">
-            <%= f.hidden_field :status, value: :admin_create %>
-          </div>
+            <div class="field">
+              <%= f.hidden_field :status, value: :admin_create %>
+            </div>
 
-          <div class="field">
-            <%= f.label :category_id %>
-            <select class="selectpicker" data-size="9" data-live-search="true"
-              name="post[category_id]" id="post_category_id">
-              <option value=""><%= t ".category" %></option>
-              <%= render "shared/select_category", categories: @nested_categories %>
-            </select>
-          </div>
+            <div class="field">
+              <%= f.label :category_id %>
+              <select class="selectpicker" data-size="9" data-live-search="true"
+                name="post[category_id]" id="post_category_id">
+                <option value=""><%= t ".category" %></option>
+                <%= render "shared/select_category", categories: @nested_categories %>
+              </select>
+            </div>
 
-          <div class="field">
-            <%= f.input :title, input_html: {class: "form-control"} %>
-          </div>
+            <div class="field">
+              <%= f.input :title, input_html: {class: "form-control"} %>
+            </div>
 
-          <div class="field">
-            <%= f.input :description, as: :text, input_html: {class: "form-control"} %>
-          </div>
+            <div class="field">
+              <%= f.input :description, as: :text, input_html: {class: "form-control"} %>
+            </div>
 
-          <div class="field">
-            <%= f.input :content, as: :ckeditor, input_html: {class: "ckeditor-field"} %>
-          </div>
+            <div class="field">
+              <%= f.input :content, as: :ckeditor, input_html: {class: "ckeditor-field"} %>
+            </div>
 
-          <div class="field">
-            <%= f.input :image, as: :file, input_html: {class: "form-control"} %>
-          </div>
+            <div class="field">
+              <%= f.input :image, as: :file, input_html: {class: "form-control"} %>
+            </div>
 
-          <div class="field">
-            <%= f.input :audio, as: :file, input_html: {class: "form-control"} %>
-          </div>
+            <div class="field">
+              <%= f.input :audio, as: :file, input_html: {class: "form-control"} %>
+            </div>
 
-          <div class="clearfix"></div>
-          <div class="field">
-            <%= f.submit t(".save"), class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
+            <div class="clearfix"></div>
+            <div class="field">
+              <%= f.submit t(".save"), class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

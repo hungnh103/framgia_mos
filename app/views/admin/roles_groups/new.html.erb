@@ -1,0 +1,20 @@
+<%= form_for [:admin, @roles_group] do |f| %>
+  <%= f.label :name %>
+  <%=  f.text_field :name %>
+  <br>
+
+    <% ["User", "Post", "Confession", "Category", "Advertisment"].each do |model_class| %>
+      <strong><%= model_class.to_s %></strong>
+      <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+
+      <%= hidden_field_tag "model_class_name[]", model_class.downcase %>
+      <% model_class.constantize::ATTRIBUTES_ROLES.each do |role| %>
+        <%= check_box_tag "#{model_class.downcase}_roles[]", role %>
+        <%= role.to_s.gsub("_", " ") %>
+      <% end %>
+      <br>
+    <% end %>
+
+  <br>
+  <%= f.submit %>
+<% end %>

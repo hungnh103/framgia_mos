@@ -46,34 +46,55 @@
             </span>
           <% end %>
         </li>
-        <li>
-          <%= link_to admin_users_path do %>
-            <i class="fa fa-user"></i>
-            <span><%= t ".users" %>
-            </span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to admin_posts_path do %>
-            <i class="fa fa-newspaper-o"></i><span><%= t ".manage posts" %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to admin_confessions_path do %>
-            <i class="fa fa-heart-o"></i><span><%= t ".confesstions" %></span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to admin_categories_path do %>
-            <i class="fa fa-cubes"></i><span><%= t ".categories" %></span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to admin_advertisments_path do %>
-            <i class="fa fa-usd"></i>
-            <span><%= t ".advertisments" %></span>
-          <% end %>
-        </li>
+        <% if can? :index, User %>
+          <li>
+            <%= link_to admin_users_path do %>
+              <i class="fa fa-user"></i>
+              <span><%= t ".users" %>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+        <% if can? :index, Post %>
+          <li>
+            <%= link_to admin_posts_path do %>
+              <i class="fa fa-newspaper-o"></i><span><%= t ".manage posts" %>
+            <% end %>
+          </li>
+        <% end %>
+        <% if can? :index, Confession %>
+          <li>
+            <%= link_to admin_confessions_path do %>
+              <i class="fa fa-heart-o"></i><span><%= t ".confesstions" %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if can? :index, Category %>
+          <li>
+            <%= link_to admin_categories_path do %>
+              <i class="fa fa-cubes"></i><span><%= t ".categories" %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if can? :index, Advertisment %>
+          <li>
+            <%= link_to admin_advertisments_path do %>
+              <i class="fa fa-usd"></i>
+              <span><%= t ".advertisments" %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if current_admin_user.admin? %>
+          <li>
+            <%= link_to admin_roles_groups_path do %>
+              <i class="fa fa-hand-rock-o"></i>
+              <span><%= t ".roles_groups" %></span>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </section>
   </aside>

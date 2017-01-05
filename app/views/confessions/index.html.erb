@@ -31,8 +31,10 @@
         </div>
       </div>
     <% end %>
-    <%= paginate @confessions, theme: "twitter-bootstrap-3",
-      pagination_class: "pagination-sm" %>
+    <div class="paginate" data-turbolinks="false">
+      <%= paginate @confessions, theme: "twitter-bootstrap-3",
+        pagination_class: "pagination-sm" %>
+    </div>
   </div>
 </div>
 <div class="col-md-4 confession-create">

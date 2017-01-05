@@ -34,6 +34,8 @@ gem "awesome_nested_set"
 gem "social-share-button"
 gem "rubocop"
 gem "figaro"
+gem "elasticsearch-model"
+gem "elasticsearch-rails"
 
 group :development, :test do
   gem "byebug", platform: :mri
